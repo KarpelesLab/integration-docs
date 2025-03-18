@@ -199,7 +199,7 @@ When the flow presents an OAuth2 button, you need to handle the OAuth2 authentic
 4. **Handling the Callback:**
    - The provider will redirect back to your application with query parameters including:
      ```
-     ?code=[authorization_code]&session=[updated_session_token]&state=[state]
+     ?session=[updated_session_token]
      ```
    - Extract the updated `session` parameter from the URL
 
@@ -210,7 +210,7 @@ When the flow presents an OAuth2 button, you need to handle the OAuth2 authentic
        "session": "[updated_session_token_from_callback]"
      }
      ```
-   - The API will exchange the authorization code automatically and continue the flow
+   - The API will continue the flow
 
 6. **Completion:**
    - The API will respond with `"complete": true` and tokens or user data
