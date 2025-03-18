@@ -126,9 +126,11 @@ To receive raw data without the wrapper, add `?raw` to your request URL.
 | 204  | No Content                                     | Successful request with no response body        |
 | 400  | Bad Request                                    | Missing or invalid parameters                   |
 | 401  | Unauthorized                                   | Authentication required                         |
+| 302  | Found                                          | Redirect to another URL                         |
 | 403  | Forbidden                                      | Insufficient permissions                        |
 | 404  | Not Found                                      | Resource not found                              |
 | 405  | Method Not Allowed                             | HTTP method not supported for this endpoint     |
+| 408  | Request Timeout                                | Request took too long to process                |
 | 429  | Too Many Requests                              | Rate limit exceeded                             |
 | 500  | Internal Server Error                          | Server-side error                               |
 
@@ -151,10 +153,32 @@ Common error tokens include:
 - `error_access_denied`: Insufficient permissions
 - `error_missing_field`: Required parameter missing
 - `error_invalid_value`: Invalid parameter value
-- `http_not_found`: Resource not found
+- `error_not_found`: Resource not found
 - `http_method_not_allowed`: Method not allowed for this endpoint
+- `error_rate_limit_exceeded`: Rate limit exceeded
+- `error_execution_timeout`: Request timed out
 
 For field validation errors, additional field-specific information may be included.
+
+### Redirects
+
+Some API requests may result in a redirect response. In these cases, the response structure will be:
+
+```json
+{
+  "result": "redirect",
+  "request_id": "unique-request-id",
+  "time": 0.123,
+  "redirect": "https://example.com/new-location"
+}
+```
+
+Common redirect scenarios include:
+- Authentication required (redirects to login page)
+- Resource moved to a new location
+- Completing a workflow that requires redirection
+
+The HTTP status code for redirects is typically 302 (Found).
 
 ## Pagination
 
