@@ -41,6 +41,15 @@ When the flow is complete, the response will be:
 }
 ```
 
+If a redirection is needed (oauth2, etc), the response will look as follows:
+
+```json
+{
+  "complete": false,
+  "url": "https://...",       // URL to redirect to
+}
+```
+
 ## UI Elements (Fields)
 
 The `fields` array contains UI elements that should be rendered by the client. Each element has a specific structure based on its type:
