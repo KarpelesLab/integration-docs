@@ -12,13 +12,6 @@ The User Flow v2 system provides a flexible, step-by-step process for user authe
 4. The client sends the input back to the server along with the session token
 5. This process repeats until the flow is complete (indicated by `complete: true` in the response)
 
-## Technical Implementation
-
-- The flow is initiated through `User._rest_flow` method
-- The method creates an instance of `User\GenericFlow` for v2 flows
-- The flow maintains a session that is passed between client and server
-- Each step in the flow process handles one aspect of the user journey
-
 ## API Response Format
 
 The API returns a JSON object with the following structure:
@@ -176,6 +169,53 @@ The system supports various flow actions:
    - If the API returns an error, display it to the user
    - Fields with errors may have a `style: "error"` attribute
 
+## OAuth2 Integration
+
+When the flow presents an OAuth2 button, you need to handle the OAuth2 authentication flow:
+
+1. **OAuth2 Button Handling:**
+   - When an OAuth2 button appears in the `fields` array, render it with the styling information provided
+   - The button should be associated with the provider's ID from the `id` field
+
+2. **Starting the OAuth2 Flow:**
+   - When the user clicks an OAuth2 button, send a request to the flow API with:
+     ```
+     {
+       "oauth2": "[provider_id]",
+       "session": "[current_session_token]"
+     }
+     ```
+
+3. **Redirect to Provider:**
+   - The API will respond with a JSON object containing a URL:
+     ```json
+     {
+       "complete": false,
+       "url": "https://provider.com/auth?params..."
+     }
+     ```
+   - Redirect the user to this URL to authenticate with the provider
+
+4. **Handling the Callback:**
+   - The provider will redirect back to your application with query parameters including:
+     ```
+     ?code=[authorization_code]&session=[updated_session_token]&state=[state]
+     ```
+   - Extract the updated `session` parameter from the URL
+
+5. **Continuing the Flow:**
+   - Send a request to the flow API with only the updated session token:
+     ```
+     {
+       "session": "[updated_session_token_from_callback]"
+     }
+     ```
+   - The API will exchange the authorization code automatically and continue the flow
+
+6. **Completion:**
+   - The API will respond with `"complete": true` and tokens or user data
+   - Use the returned tokens for API access or follow any provided redirect
+
 ## Security Considerations
 
 - The session token is encrypted and has a 30-minute expiration
@@ -183,7 +223,9 @@ The system supports various flow actions:
 - Password inputs should use proper security measures (autocomplete, etc.)
 - OAuth flows include proper validation of redirect URIs
 
-## Example Flow: Login
+## Example Flows
+
+### Example Flow: Login
 
 1. Client initiates login flow
 2. Server returns email input field
@@ -195,7 +237,7 @@ The system supports various flow actions:
 8. Server returns `complete: true` with user data
 9. Client redirects to the designated page or application
 
-## Example Flow: Registration
+### Example Flow: Registration
 
 1. Client initiates registration flow
 2. Server returns registration form fields (name, email, password, etc.)
@@ -204,3 +246,17 @@ The system supports various flow actions:
 5. User enters verification code, client submits
 6. Server returns `complete: true` with user data
 7. Client redirects to the designated page or application
+
+### Example Flow: OAuth2 Login
+
+1. Client initiates login flow
+2. Server returns login options including OAuth2 provider buttons
+3. User clicks an OAuth2 provider button (e.g., Google)
+4. Client sends request with `oauth2: "google"` and current session
+5. Client receives URL and redirects user to Google's auth page
+6. User authenticates with Google
+7. Google redirects back to the application with code and updated session
+8. Client extracts the updated session from the URL
+9. Client sends request with only the updated session token
+10. Server completes the flow and returns user data and tokens
+11. Client uses the provided tokens for API access
