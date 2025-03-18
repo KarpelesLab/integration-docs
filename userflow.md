@@ -70,10 +70,23 @@ The `fields` array contains UI elements that should be rendered by the client. E
 {
   "cat": "input",
   "name": "email",
-  "type": "email", // Can be: text, email, password, checkbox, phone
+  "type": "email", // Can be: text, email, password, phone
   "label": {"@token": ["input_field_email"]},
   "format": "AAAA-AAAA", // Optional format hint
   "attributes": {"autocomplete": "off"} // Optional HTML attributes
+}
+```
+
+### Checkbox Input
+
+If checked the value true (or 1 if sending as url encoded or MIME POST data) must be passed into the form.
+
+```json
+{
+  "cat": "input",
+  "name": "agree_terms",
+  "type": "checkbox",
+  "label": {"@token": ["agree_to_terms"]},
 }
 ```
 
