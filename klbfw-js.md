@@ -103,7 +103,7 @@ Functions for making API calls to KarpelesLab services.
 ```typescript
 rest(name: string, verb: string, params?: Record<string, any> | string, context?: Record<string, any>): Promise<any>
 rest_get(name: string, params?: Record<string, any> | string): Promise<any> // Backward compatibility
-restGet(name: string, params?: Record<string, any> | string): Promise<any>
+restGet(name: string, params?: Record<string, any> | string): Promise<any> // Use only for cachable data
 ```
 
 #### Parameters
@@ -112,6 +112,8 @@ restGet(name: string, params?: Record<string, any> | string): Promise<any>
 - `verb`: HTTP method (GET, POST, PUT, DELETE)
 - `params`: Request parameters (object or JSON string)
 - `context`: Additional context information
+
+> **Important**: `restGet()` should only be used for cachable data, such as `Language:local` and similar static resources. Any API that may contain dynamic data must not use this function and should instead use `rest()`. The `restGet()` function implements caching that can prevent changes in dynamic data from being detected.
 
 #### Return Value
 
@@ -180,8 +182,8 @@ trimPrefix(path: string): string
 // Import the library
 import { rest, restGet, getCookie, setCookie, getLocale } from '@karpeleslab/klbfw';
 
-// Make REST API calls
-restGet('User/Session:get')
+// Make REST API calls (note: User/Session is dynamic data so we use rest() not restGet())
+rest('User/Session:get', 'GET')
   .then(session => {
     console.log('User session:', session);
   })
@@ -239,7 +241,7 @@ upload.append('Storage/File:upload', file, { public: true })
     console.error('Upload failed:', error.message);
   });
 
-// Get internationalization data
+// Get internationalization data (language data is cachable, so restGet is used internally)
 getI18N('en-US')
   .then(i18nData => {
     console.log('Loaded translations for en-US');
@@ -313,7 +315,7 @@ const path = getPath();     // path without prefix
 Working with translations and locale-specific data. This is usually best left to a specific module like `@karpeleslab/i18next-klb-backend`.
 
 ```javascript
-// Get translations for current locale
+// Get translations for current locale (language data is cachable)
 getI18N().then(translations => {
   console.log('Available translations:', Object.keys(translations));
   
