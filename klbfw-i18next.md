@@ -52,8 +52,6 @@ i18next
   .init({
     fallbackLng: false,
     load: 'currentOnly',
-    ns: ['translation'],
-    defaultNS: 'translation',
     interpolation: {
       escapeValue: false // not needed for react
     }
