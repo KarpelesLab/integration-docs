@@ -84,7 +84,7 @@ The system automatically uses the language set in `FW.Locale`. This is typically
 
 ## Troubleshooting
 
-- **Missing Translations**: Check your CSV files for the correct format and ensure the token exactly matches what you're using in code.
+- **Missing Translations**: Check your CSV files for the correct format and ensure the token exactly matches what you're using in code. The server system will also apply tokens from the I18N files. Tokens which aren't defined will be returned as `[I18N:<token>]`.
 - **Loading Issues**: The system will look for translations in `/l/<language>/_special/locale.json`. This is handled automatically by the KLB Framework.
 - **Language Codes**: Always use the full 5-character language code format (e.g., `en-US`, not just `en`).
 
