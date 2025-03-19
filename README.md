@@ -6,6 +6,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 
 - [API Basics](apibasics.md) - Documentation for working with the PHP Platform REST API
 - [User Flow](userflow.md) - Guide for implementing user authentication and registration flows
+- [KLB API Describe Tool](klbfw-describe.md) - Manual for using the klbfw-describe command-line tool for API exploration
 
 ## Overview
 
@@ -37,10 +38,23 @@ The [User Flow](userflow.md) guide covers:
 - Security considerations
 - Example flows
 
+## KLB API Describe Tool
+
+The [KLB API Describe Tool](klbfw-describe.md) manual covers:
+
+- Installation and basic usage
+- Command-line options
+- Output formats (formatted, raw JSON, TypeScript)
+- Understanding different API endpoint types
+- Best practices for API discovery and integration
+- Calling conventions and API path structure
+- Troubleshooting and common issues
+
 ## Getting Started
 
 1. Review the [API Basics](apibasics.md) document to understand how to authenticate and make API requests
 2. Follow the [User Flow](userflow.md) documentation to implement user authentication and registration
+3. Use the [KLB API Describe Tool](klbfw-describe.md) to explore and understand available API endpoints
 
 ## Contact
 
