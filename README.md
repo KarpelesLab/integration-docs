@@ -9,6 +9,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 - [KLB API Describe Tool](klbfw-describe.md) - Manual for using the klbfw-describe command-line tool for API exploration
 - [KLB Framework JavaScript](klbfw-js.md) - Documentation for the JavaScript framework integration
 - [KLB Framework i18n](klbfw-i18next.md) - Guide for implementing internationalization with i18next
+- [KLB Framework Flutter](klbfw-flutter.md) - Documentation for the Flutter package integration
 
 ## Overview
 
@@ -74,6 +75,18 @@ The [KLB Framework i18n](klbfw-i18next.md) guide covers:
 - Language detection
 - Troubleshooting and best practices
 
+## KLB Framework Flutter
+
+The [KLB Framework Flutter](klbfw-flutter.md) documentation covers:
+
+- Installing and initializing the Flutter package
+- Authentication with OAuth2
+- Making API requests (authenticated, unauthenticated, optional authentication)
+- User management features
+- File uploads with progress tracking
+- Deep link handling
+- Error handling
+
 ## Getting Started
 
 1. Review the [API Basics](apibasics.md) document to understand how to authenticate and make API requests
@@ -81,6 +94,7 @@ The [KLB Framework i18n](klbfw-i18next.md) guide covers:
 3. Use the [KLB API Describe Tool](klbfw-describe.md) to explore and understand available API endpoints
 4. Integrate the [KLB Framework JavaScript](klbfw-js.md) for client-side implementation
 5. Set up [i18n with i18next](klbfw-i18next.md) for multi-language support
+6. Use the [KLB Framework Flutter](klbfw-flutter.md) for mobile application development
 
 ## Using with Claude
 
