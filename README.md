@@ -8,6 +8,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 - [User Flow](userflow.md) - Guide for implementing user authentication and registration flows
 - [KLB API Describe Tool](klbfw-describe.md) - Manual for using the klbfw-describe command-line tool for API exploration
 - [KLB Framework JavaScript](klbfw-js.md) - Documentation for the JavaScript framework integration
+- [KLB Framework i18n](klbfw-i18next.md) - Guide for implementing internationalization with i18next
 
 ## Overview
 
@@ -63,12 +64,24 @@ The [KLB Framework JavaScript](klbfw-js.md) documentation covers:
 - Client-side validation
 - Examples and usage patterns
 
+## KLB Framework i18n
+
+The [KLB Framework i18n](klbfw-i18next.md) guide covers:
+
+- Setting up internationalization with i18next
+- Preparing CSV translation files
+- Using translations in your code
+- Managing namespaces
+- Language detection
+- Troubleshooting and best practices
+
 ## Getting Started
 
 1. Review the [API Basics](apibasics.md) document to understand how to authenticate and make API requests
 2. Follow the [User Flow](userflow.md) documentation to implement user authentication and registration
 3. Use the [KLB API Describe Tool](klbfw-describe.md) to explore and understand available API endpoints
 4. Integrate the [KLB Framework JavaScript](klbfw-js.md) for client-side implementation
+5. Set up [i18n with i18next](klbfw-i18next.md) for multi-language support
 
 ## Using with Claude
 
