@@ -71,7 +71,6 @@ The [KLB Framework i18n](klbfw-i18next.md) guide covers:
 - Setting up internationalization with i18next
 - Preparing CSV translation files
 - Using translations in your code
-- Managing namespaces
 - Language detection
 - Troubleshooting and best practices
 

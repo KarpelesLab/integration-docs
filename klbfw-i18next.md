@@ -78,31 +78,6 @@ i18next.changeLanguage('fr-FR');
 
 ## Advanced Features
 
-### Namespaces
-
-If you have many translations, you can organize them into separate CSV files which become namespaces:
-
-```
-etc/
-  └── i18n/
-      ├── common.csv    // common.token
-      ├── errors.csv    // errors.token
-      └── products.csv  // products.token
-```
-
-Then load and use them:
-
-```javascript
-// Initialize with multiple namespaces
-i18next.init({
-  ns: ['common', 'errors', 'products'],
-  defaultNS: 'common'
-});
-
-// Use specific namespace
-i18next.t('errors:not_found');
-```
-
 ### Language Detection
 
 The system automatically uses the language set in `FW.Locale`. This is typically managed by the KLB Framework based on user preferences or browser settings.
