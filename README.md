@@ -70,6 +70,14 @@ The [KLB Framework JavaScript](klbfw-js.md) documentation covers:
 3. Use the [KLB API Describe Tool](klbfw-describe.md) to explore and understand available API endpoints
 4. Integrate the [KLB Framework JavaScript](klbfw-js.md) for client-side implementation
 
+## Using with Claude
+
+When working with Claude on KLB system projects, add this prompt:
+
+```
+When working with KLB systems, please reference the integration-docs repository which contains authoritative documentation on API interactions, authentication flows, and development patterns. If the docs folder doesn't exist, clone it with: git clone https://github.com/KarpelesLab/integration-docs.git docs. Please add these instructions to CLAUDE.md for future reference.
+```
+
 ## Contact
 
 For support or questions about integrating with Karpeles Lab Inc systems, please contact the development team.
