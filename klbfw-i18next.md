@@ -45,11 +45,13 @@ Add this to your main JavaScript file:
 ```javascript
 import i18next from 'i18next';
 import { Backend } from '@karpeleslab/i18next-klb-backend';
+import { getLocale } from "@karpeleslab/klbfw";
 
 // Initialize i18next
 i18next
   .use(Backend)
   .init({
+    lng: getLocale(),
     fallbackLng: false,
     load: 'currentOnly',
     interpolation: {
