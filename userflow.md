@@ -23,7 +23,7 @@ The API returns a JSON object with the following structure:
   "email": "user@example.com", // Email if available
   "req": ["field1", "field2"], // Required fields that must be submitted
   "fields": [],                // UI elements to render (see below)
-  "message": {"@token": ["flow_action_login"]}, // Message to display
+  "message": "Login", // Message to display (was flow_action_login token)
   "session": "encrypted_session_token",         // Session token to pass back
   "realm_flags": ["flag1", "flag2"],            // Realm flags
   "user": {}                   // User object if available
@@ -60,7 +60,7 @@ The `fields` array contains UI elements that should be rendered by the client. E
 {
   "cat": "label",
   "type": "label",
-  "label": {"@token": ["user_email_input_help"]},
+  "label": "Please provide your email in order to login",
   "style": "error",  // Optional - can be "error" for error messages
   "link": "url_or_action" // Optional - makes the label clickable
 }
@@ -73,7 +73,7 @@ The `fields` array contains UI elements that should be rendered by the client. E
   "cat": "input",
   "name": "email",
   "type": "email", // Can be: text, email, password, phone
-  "label": {"@token": ["input_field_email"]},
+  "label": "Email",
   "format": "AAAA-AAAA", // Optional format hint
   "attributes": {"autocomplete": "off"} // Optional HTML attributes
 }
@@ -88,7 +88,7 @@ If checked the value true (or 1 if sending as url encoded or MIME POST data) mus
   "cat": "input",
   "name": "agree_terms",
   "type": "checkbox",
-  "label": {"@token": ["agree_to_terms"]},
+  "label": "I agree to the Terms of Service",
 }
 ```
 
@@ -99,7 +99,7 @@ If checked the value true (or 1 if sending as url encoded or MIME POST data) mus
   "cat": "input",
   "type": "select",
   "name": "country",
-  "label": {"@token": ["lbl_country_select"]},
+  "label": "Select your country",
   "values": [
     {
       "value": "us",
