@@ -114,6 +114,32 @@ If checked the value true (or 1 if sending as url encoded or MIME POST data) mus
 }
 ```
 
+### Dynamic Select Input
+
+For select inputs that need to fetch options dynamically from an API:
+
+```json
+{
+  "cat": "input",
+  "type": "select",
+  "name": "country",
+  "label": "Select your country",
+  "source": {
+    "api": "Country",
+    "label_field": "Name",
+    "key_field": "Country__"
+  },
+  "default": "US"
+}
+```
+
+When a select field has a `source` property:
+- The API specified in `api` must be called to retrieve the select options
+- `label_field` specifies the field name to use for display text of each option
+- `key_field` specifies the field name to use for the value of each option
+- If a value is already set for this field, it should be pre-selected
+- If no value is set but `default` is provided, that value should be pre-selected
+
 ### OAuth2 Button
 
 ```json
