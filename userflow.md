@@ -62,9 +62,30 @@ The `fields` array contains UI elements that should be rendered by the client. E
   "type": "label",
   "label": "Please provide your email in order to login",
   "style": "error",  // Optional - can be "error" for error messages
-  "link": "url_or_action" // Optional - makes the label clickable
+  "link": "url_or_action" // Optional - makes the label clickable with a URL or action
 }
 ```
+
+#### Action Links
+
+Actions can be triggered using the `@action` syntax in the `link` field:
+
+```json
+{
+  "cat": "label",
+  "type": "label",
+  "label": "Forgot your password?",
+  "link": "@action=reset_password"
+}
+```
+
+When the user clicks on a label with an `@action` link, the client should:
+1. Reset the current session data
+2. Initiate a new flow with the specified action
+3. Stay on the same UI view
+4. Send a request to the API with the new action but no session token
+
+The server will respond with the initial step of the new flow action. This allows for seamless transitions between different flows (e.g., from login to password reset) without redirecting the user.
 
 ### Text Input
 
@@ -203,6 +224,11 @@ The system supports various flow actions:
 5. **Handle Errors:**
    - If the API returns an error, display it to the user
    - Fields with errors may have a `style: "error"` attribute
+   
+6. **Handle Flow Transitions:**
+   - Labels with `link` containing "@action=..." indicate flow navigation options
+   - When a user clicks on an @action link, the client should reset the session and start a new flow with the specified action
+   - This keeps the user on the same UI while changing the logical flow (e.g., switching from login to password reset)
 
 ## OAuth2 Integration
 
