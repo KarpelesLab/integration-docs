@@ -98,11 +98,9 @@ The [KLB Framework Flutter](klbfw-flutter.md) documentation covers:
 
 ## Using with Claude
 
-When working with Claude on KLB system projects, add this prompt:
+When working with Claude on KLB system projects, add the describe MCP tool to claude (replace "project" with "user" for global usage):
 
-```
-When working with KLB systems, please reference the integration-docs repository which contains authoritative documentation on API interactions, authentication flows, and development patterns. If the docs folder doesn't exist, clone it with: git clone https://github.com/KarpelesLab/integration-docs.git docs. Please add these instructions to CLAUDE.md for future reference.
-```
+    claude mcp add klbfw-describe -s project -- npx -y @karpeleslab/klbfw-describe --mcp
 
 ## Contact
 
