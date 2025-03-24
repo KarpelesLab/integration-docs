@@ -111,9 +111,42 @@ When querying collections, the `data` field contains an array of items:
     "count": 42,
     "page_max": 3,
     "results_per_page": 20
+  },
+  "access": {
+    "usrr-fensyz-rdgj-ff7m-2arf-biwzp7dm": {
+      "required": "R",
+      "available": "O",
+      "expires": null,
+      "user_group": "usg-3dz36z-v7s5-h6to-3qlp-nbcynpru",
+      "group": {
+        "User_Group__": "usg-3dz36z-v7s5-h6to-3qlp-nbcynpru",
+        "User__": "usr-tif4np-ymkf-dcle-a6ez-uyioajly",
+        "Name": "Group Name",
+        "Type": "group",
+        "Nickname": "groupnn",
+        "Status": "private",
+        "Backend": "none",
+        "Owner": {
+          "User_Id": "usr-tif4np-ymkf-dcle-a6ez-uyioajly",
+          "User__": "usr-tif4np-ymkf-dcle-a6ez-uyioajly",
+          "Index": "2",
+          "Link": null,
+          "UUID": "9a0bc6bf-0c51-4625-901e-26698438095e",
+          "Profile": {
+            "Display_Name": "MagicalTux",
+            "Username": null,
+            "Gender": null
+          },
+          "Display_Name": "MagicalTux",
+          "Email": "m***@***.com",
+        }
+      }
+    }
   }
 }
 ```
+
+The `access` field is included when the API response contains access right information for objects. It provides details about what access rights are required and available for each object, along with group information when applicable.
 
 To receive raw data without the wrapper, add `?raw` to your request URL.
 
