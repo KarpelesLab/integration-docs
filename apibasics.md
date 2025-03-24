@@ -78,7 +78,7 @@ You can send data to the API in several formats:
    ```
    GET /_rest/User?_={"Name":"John","Age":{"$gt":21}}
    ```
-   This is useful for complex queries that would be cumbersome as individual query parameters.
+   This is useful for complex queries that would be cumbersome as individual query parameters. If using an abstraction library the library will handle that automatically, so always pass the parameters as an object as you would usually do.
 
 ## Response Format
 
