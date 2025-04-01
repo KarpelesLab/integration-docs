@@ -1,0 +1,44 @@
+[
+  {
+    "uri": "apibasics.md",
+    "name": "PHP Platform API Documentation",
+    "description": "Documentation for working with the PHP Platform REST API including authentication, requests, responses, and examples",
+    "mimeType": "text/plain"
+  },
+  {
+    "uri": "klbfw-describe.md",
+    "name": "KLB API Describe Tool Manual",
+    "description": "Guide for using the klbfw-describe command-line utility to explore and understand KLB API endpoints",
+    "mimeType": "text/plain"
+  },
+  {
+    "uri": "klbfw-js.md",
+    "name": "KarpelesLab Frontend Framework (klbfw)",
+    "description": "Documentation for the JavaScript library for communicating with KarpelesLab API services from both browser and Node.js environments",
+    "mimeType": "text/plain"
+  },
+  {
+    "uri": "klbfw-i18next.md",
+    "name": "KLB Framework i18n Integration Guide",
+    "description": "Guide for enabling internationalization (i18n) on your KLB Framework site using i18next",
+    "mimeType": "text/plain"
+  },
+  {
+    "uri": "klbfw-flutter.md",
+    "name": "AtOnline API Flutter Package",
+    "description": "Documentation for the Flutter package that provides tools for interacting with AtOnline.com APIs including CMS, Naka, and other services",
+    "mimeType": "text/plain"
+  },
+  {
+    "uri": "userflow.md",
+    "name": "User Flow v2 Documentation",
+    "description": "Guide for implementing the flexible, step-by-step process for user authentication, registration, and account management workflows",
+    "mimeType": "text/plain"
+  },
+  {
+    "uri": "README.md",
+    "name": "Karpeles Lab Inc Integration Documentation",
+    "description": "Overview of all documentation for integrating with Karpeles Lab Inc systems and APIs",
+    "mimeType": "text/plain"
+  }
+]
