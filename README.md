@@ -10,6 +10,8 @@ This repository contains comprehensive documentation for integrating with Karpel
 - [KLB Framework JavaScript](klbfw-js.md) - Documentation for the JavaScript framework integration
 - [KLB Framework i18n](klbfw-i18next.md) - Guide for implementing internationalization with i18next
 - [KLB Framework Flutter](klbfw-flutter.md) - Documentation for the Flutter package integration
+- [Stripe Express Checkout](express_checkout.md) - Guide for implementing Stripe Express Checkout (Apple Pay, Google Pay)
+- [Media Variations API](media_variation.md) - Documentation for transforming media files through API endpoints
 
 ## Overview
 
@@ -87,6 +89,29 @@ The [KLB Framework Flutter](klbfw-flutter.md) documentation covers:
 - Deep link handling
 - Error handling
 
+## Stripe Express Checkout
+
+The [Stripe Express Checkout](express_checkout.md) guide covers:
+
+- Integrating Stripe Express Checkout in Vue.js applications
+- Setting up Apple Pay and Google Pay buttons
+- Handling both express checkout and standard card payments
+- Creating orders on-the-fly during payment
+- Managing the complete payment lifecycle
+- Handling redirects and payment confirmations
+- Testing express checkout in development
+
+## Media Variations API
+
+The [Media Variations API](media_variation.md) documentation covers:
+
+- Requesting transformed versions of images and audio files
+- Available filters for image processing (scaling, effects, format conversion)
+- Audio format conversion and processing options
+- Handling multi-page documents and PDFs
+- Best practices for responsive images and media optimization
+- Performance considerations and CDN delivery
+
 ## Getting Started
 
 1. Review the [API Basics](apibasics.md) document to understand how to authenticate and make API requests
@@ -95,6 +120,8 @@ The [KLB Framework Flutter](klbfw-flutter.md) documentation covers:
 4. Integrate the [KLB Framework JavaScript](klbfw-js.md) for client-side implementation
 5. Set up [i18n with i18next](klbfw-i18next.md) for multi-language support
 6. Use the [KLB Framework Flutter](klbfw-flutter.md) for mobile application development
+7. Implement [Stripe Express Checkout](express_checkout.md) for streamlined payment processing
+8. Utilize [Media Variations API](media_variation.md) for optimized media delivery
 
 ## Using with Claude
 

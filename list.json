@@ -36,6 +36,18 @@
     "mimeType": "text/plain"
   },
   {
+    "uri": "express_checkout.md",
+    "name": "Stripe Express Checkout Integration Guide",
+    "description": "Guide for implementing Stripe Express Checkout (Apple Pay, Google Pay) in Vue.js applications with order creation and payment processing",
+    "mimeType": "text/plain"
+  },
+  {
+    "uri": "media_variation.md",
+    "name": "Media Variations API Documentation",
+    "description": "Documentation for requesting and using transformed versions of media files (images and audio) through API endpoints with various filters and formats",
+    "mimeType": "text/plain"
+  },
+  {
     "uri": "README.md",
     "name": "Karpeles Lab Inc Integration Documentation",
     "description": "Overview of all documentation for integrating with Karpeles Lab Inc systems and APIs",
