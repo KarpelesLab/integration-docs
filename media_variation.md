@@ -255,15 +255,6 @@ This will create separate URLs for each page:
 }
 ```
 
-### REST Endpoints for Direct Variation Access
-
-Some objects may provide direct variation endpoints:
-
-```http
-GET /api/media/image/{id}/variation/{variation_string}
-GET /api/media/audio/{id}/variation/{variation_string}
-```
-
 ## Performance Considerations
 
 1. **On-demand Generation**: Variations are generated on first request and then cached
