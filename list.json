@@ -48,6 +48,12 @@
     "mimeType": "text/plain"
   },
   {
+    "uri": "install-version-service-worker.md",
+    "name": "Version Service Worker Installation Guide",
+    "description": "Guide for setting up a service worker that adds version headers to asset requests for better cache management and version tracking in Vue.js applications",
+    "mimeType": "text/plain"
+  },
+  {
     "uri": "README.md",
     "name": "Karpeles Lab Inc Integration Documentation",
     "description": "Overview of all documentation for integrating with Karpeles Lab Inc systems and APIs",

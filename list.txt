@@ -1,5 +1,6 @@
 apibasics.md
 express_checkout.md
+install-version-service-worker.md
 klbfw-describe.md
 klbfw-flutter.md
 klbfw-i18next.md

@@ -12,6 +12,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 - [KLB Framework Flutter](klbfw-flutter.md) - Documentation for the Flutter package integration
 - [Stripe Express Checkout](express_checkout.md) - Guide for implementing Stripe Express Checkout (Apple Pay, Google Pay)
 - [Media Variations API](media_variation.md) - Documentation for transforming media files through API endpoints
+- [Version Service Worker](install-version-service-worker.md) - Guide for setting up a service worker for version tracking in Vue.js apps
 
 ## Overview
 
@@ -112,6 +113,17 @@ The [Media Variations API](media_variation.md) documentation covers:
 - Best practices for responsive images and media optimization
 - Performance considerations and CDN delivery
 
+## Version Service Worker
+
+The [Version Service Worker](install-version-service-worker.md) guide covers:
+
+- Setting up a service worker that adds version headers to asset requests
+- Implementing version tracking using Git commit hashes
+- Configuring webpack plugins for automatic version injection
+- Integrating version information into Vue.js applications
+- Enabling better cache management and version-specific routing
+- Browser compatibility and troubleshooting
+
 ## Getting Started
 
 1. Review the [API Basics](apibasics.md) document to understand how to authenticate and make API requests
@@ -122,6 +134,7 @@ The [Media Variations API](media_variation.md) documentation covers:
 6. Use the [KLB Framework Flutter](klbfw-flutter.md) for mobile application development
 7. Implement [Stripe Express Checkout](express_checkout.md) for streamlined payment processing
 8. Utilize [Media Variations API](media_variation.md) for optimized media delivery
+9. Set up [Version Service Worker](install-version-service-worker.md) for asset version tracking
 
 ## Using with Claude
 
