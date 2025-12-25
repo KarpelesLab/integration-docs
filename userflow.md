@@ -189,6 +189,38 @@ When a select field has a `source` property:
 }
 ```
 
+### Input Validation
+
+Input fields can include a `validation` property to enforce specific validation rules on the client side.
+
+#### Validation Types
+
+| Type | Description |
+|------|-------------|
+| `equal_other_field` | Validates that the field value matches another field's value |
+
+#### equal_other_field
+
+Used to validate that one field's value matches another field. Common use case is password confirmation:
+
+```json
+{
+  "cat": "input",
+  "name": "password2",
+  "type": "password",
+  "label": "Confirm Password",
+  "validation": {
+    "type": "equal_other_field",
+    "field": "password"
+  }
+}
+```
+
+When a field has this validation:
+- The client should validate that the value entered matches the value of the field specified in `field`
+- Validation should occur before form submission
+- If validation fails, display an appropriate error message (e.g., "Passwords do not match")
+
 ## Common Flow Actions
 
 The system supports various flow actions:
