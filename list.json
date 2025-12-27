@@ -30,6 +30,12 @@
     "mimeType": "text/plain"
   },
   {
+    "uri": "upload_lowlevel.md",
+    "name": "KLB Upload Protocol Specification",
+    "description": "Low-level upload protocol documentation for building client implementations in environments without a native klbfw SDK",
+    "mimeType": "text/plain"
+  },
+  {
     "uri": "userflow.md",
     "name": "User Flow v2 Documentation",
     "description": "Guide for implementing the flexible, step-by-step process for user authentication, registration, and account management workflows",

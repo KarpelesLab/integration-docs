@@ -13,6 +13,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 - [Stripe Express Checkout](express_checkout.md) - Guide for implementing Stripe Express Checkout (Apple Pay, Google Pay)
 - [Media Variations API](media_variation.md) - Documentation for transforming media files through API endpoints
 - [Version Service Worker](install-version-service-worker.md) - Guide for setting up a service worker for version tracking in Vue.js apps
+- [Upload Protocol](upload_lowlevel.md) - Low-level upload protocol for client implementations without a native SDK
 
 ## Overview
 
@@ -123,6 +124,17 @@ The [Version Service Worker](install-version-service-worker.md) guide covers:
 - Integrating version information into Vue.js applications
 - Enabling better cache management and version-specific routing
 - Browser compatibility and troubleshooting
+
+## Upload Protocol
+
+The [Upload Protocol](upload_lowlevel.md) specification covers:
+
+- Low-level upload protocol for environments without a native klbfw SDK
+- Two-phase upload process (negotiation and transfer)
+- Direct PUT upload method with chunking support
+- AWS S3 multipart upload method with request signing
+- Error handling and retry behavior
+- Implementation checklists and example code
 
 ## Getting Started
 

@@ -1,17 +1,17 @@
 # KLB Upload Protocol Specification
 
-This document describes the low-level upload protocol used by the KLB platform. It is intended for developers implementing server-side APIs that need to accept file uploads from KLB-compatible clients.
+This document describes the low-level upload protocol used by the KLB platform. It is intended for developers building client applications in environments where a native klbfw SDK is not available.
 
 ## Important Note
 
-**In most cases, you do not need to implement this protocol yourself.** The KLB platform provides SDKs for various languages (JavaScript, PHP, Go, etc.) that handle file uploads automatically. These SDKs manage chunking, retries, progress tracking, and protocol negotiation transparently.
+**In most cases, you do not need to implement this protocol yourself.** The KLB platform provides SDKs for various languages and frameworks (JavaScript, Flutter, PHP, Go, etc.) that handle file uploads automatically. These SDKs manage chunking, retries, progress tracking, and protocol negotiation transparently.
 
 This documentation is for:
-- Implementing custom upload endpoints outside the standard KLB infrastructure
+- Building client implementations in languages without an official klbfw SDK
 - Understanding the underlying protocol for debugging purposes
-- Building alternative client implementations
+- Implementing uploads in restricted environments (embedded systems, custom runtimes)
 
-If you are using a KLB platform SDK, file uploads are handled automatically when calling API endpoints that accept file parameters.
+If you are using a KLB platform SDK (such as klbfw-js or klbfw-flutter), file uploads are handled automatically when calling API endpoints that accept file parameters.
 
 ## Design Principle
 

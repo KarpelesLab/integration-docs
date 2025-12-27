@@ -7,4 +7,5 @@ klbfw-i18next.md
 klbfw-js.md
 media_variation.md
 README.md
+upload_lowlevel.md
 userflow.md
