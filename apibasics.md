@@ -212,9 +212,101 @@ POST Resource:customMethod
 
 Several special parameters modify API behavior:
 
-- `_expand`: Include related resources in the response
+- `_expand`: Include related resources in the response (see below)
 - `pretty`: Format JSON response with indentation for readability
 - `_minimum_right`: Minimum access level required for the request (for certain endpoints)
+
+### The `_expand` Parameter
+
+The `_expand` parameter allows you to expand related objects inline within API responses. This is useful when you need to retrieve related data without making additional API calls.
+
+**How it works:**
+
+API responses often contain references to other objects, indicated by fields ending in `__` (double underscore). For example, a response might include:
+
+```json
+{
+  "id": "ord-abc123",
+  "User__": "usr-xyz789",
+  "Product__": "prd-def456",
+  "Status": "pending"
+}
+```
+
+By using `_expand`, you can request that these references be expanded to include the full object data.
+
+**Usage:**
+
+`_expand` accepts either a comma-separated string or an array of strings specifying which objects to expand. All values must start with `/`.
+
+**Single expansion:**
+```
+GET Order/ord-abc123 {"_expand": "/User"}
+```
+
+Or using comma-separated format:
+```
+GET Order/ord-abc123 {"_expand": "/User,/Product"}
+```
+
+This expands the `User__` reference and adds a `User` field containing the full user object:
+
+```json
+{
+  "id": "ord-abc123",
+  "User__": "usr-xyz789",
+  "User": {
+    "id": "usr-xyz789",
+    "Name": "John Doe",
+    "Email": "john@example.com"
+  },
+  "Product__": "prd-def456",
+  "Status": "pending"
+}
+```
+
+**Multiple expansions:**
+```
+GET Order/ord-abc123 {"_expand": ["/User", "/Product"]}
+```
+
+This expands both `User__` and `Product__` references:
+
+```json
+{
+  "id": "ord-abc123",
+  "User__": "usr-xyz789",
+  "User": {
+    "id": "usr-xyz789",
+    "Name": "John Doe",
+    "Email": "john@example.com"
+  },
+  "Product__": "prd-def456",
+  "Product": {
+    "id": "prd-def456",
+    "Name": "Widget",
+    "Price": 29.99
+  },
+  "Status": "pending"
+}
+```
+
+**Expanding embedded objects:**
+
+When an object is already embedded in the response (not just a reference), use the path to expand its nested references:
+
+```
+GET Order/ord-abc123 {"_expand": ["/User", "/User/Profile"]}
+```
+
+**Path syntax:**
+
+All `_expand` values must start with a `/`. The path specifies which object reference to expand:
+
+- `/ObjectName` - Expands a top-level reference field (`ObjectName__`)
+- `/ObjectName/NestedObject` - Expands nested references within embedded objects
+
+When querying collections (lists), the same expand paths apply to each item in the array. For example, `{"_expand": "/User"}` on a list endpoint will expand the `User__` field for every item in the results.
 
 ## Query Filters
 
