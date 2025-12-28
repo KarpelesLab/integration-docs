@@ -6,6 +6,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 
 - [API Basics](apibasics.md) - Documentation for working with the PHP Platform REST API
 - [Access Levels](access_levels.md) - Guide for understanding access levels, permissions, and user groups
+- [OAuth2 Authentication](oauth2_auth.md) - Guide for OAuth2 token authentication and API key signing
 - [User Flow](userflow.md) - Guide for implementing user authentication and registration flows
 - [KLB API Describe Tool](klbfw-describe.md) - Manual for using the klbfw-describe command-line tool for API exploration
 - [KLB Framework JavaScript](klbfw-js.md) - Documentation for the JavaScript framework integration
@@ -44,6 +45,16 @@ The [Access Levels](access_levels.md) guide covers:
 - Understanding the `access` property in API responses
 - Public resources and link-based sharing
 - Parent-child access inheritance
+
+## OAuth2 Authentication
+
+The [OAuth2 Authentication](oauth2_auth.md) guide covers:
+
+- OAuth2 bearer token authentication for user sessions
+- Token refresh flow and automatic renewal
+- API key authentication using Ed25519 signatures
+- Request signing for server-to-server communication
+- Error handling and best practices
 
 ## User Flow Documentation
 
@@ -152,14 +163,15 @@ The [Upload Protocol](upload_lowlevel.md) specification covers:
 
 1. Review the [API Basics](apibasics.md) document to understand how to authenticate and make API requests
 2. Understand the [Access Levels](access_levels.md) to work with permissions and user groups
-3. Follow the [User Flow](userflow.md) documentation to implement user authentication and registration
-4. Use the [KLB API Describe Tool](klbfw-describe.md) to explore and understand available API endpoints
-5. Integrate the [KLB Framework JavaScript](klbfw-js.md) for client-side implementation
-6. Set up [i18n with i18next](klbfw-i18next.md) for multi-language support
-7. Use the [KLB Framework Flutter](klbfw-flutter.md) for mobile application development
-8. Implement [Stripe Express Checkout](express_checkout.md) for streamlined payment processing
-9. Utilize [Media Variations API](media_variation.md) for optimized media delivery
-10. Set up [Version Service Worker](install-version-service-worker.md) for asset version tracking
+3. Learn about [OAuth2 Authentication](oauth2_auth.md) for token management and API key signing
+4. Follow the [User Flow](userflow.md) documentation to implement user authentication and registration
+5. Use the [KLB API Describe Tool](klbfw-describe.md) to explore and understand available API endpoints
+6. Integrate the [KLB Framework JavaScript](klbfw-js.md) for client-side implementation
+7. Set up [i18n with i18next](klbfw-i18next.md) for multi-language support
+8. Use the [KLB Framework Flutter](klbfw-flutter.md) for mobile application development
+9. Implement [Stripe Express Checkout](express_checkout.md) for streamlined payment processing
+10. Utilize [Media Variations API](media_variation.md) for optimized media delivery
+11. Set up [Version Service Worker](install-version-service-worker.md) for asset version tracking
 
 ## Using with Claude
 

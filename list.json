@@ -12,6 +12,12 @@
     "mimeType": "text/plain"
   },
   {
+    "uri": "oauth2_auth.md",
+    "name": "OAuth2 Authentication Guide",
+    "description": "Guide for OAuth2 token authentication, automatic token refresh, and API key signing using Ed25519 for server-to-server communication",
+    "mimeType": "text/plain"
+  },
+  {
     "uri": "klbfw-describe.md",
     "name": "KLB API Describe Tool Manual",
     "description": "Guide for using the klbfw-describe command-line utility to explore and understand KLB API endpoints",
