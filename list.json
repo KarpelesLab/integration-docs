@@ -6,6 +6,12 @@
     "mimeType": "text/plain"
   },
   {
+    "uri": "access_levels.md",
+    "name": "Access Levels and Permissions",
+    "description": "Documentation for the access control system including access levels, user groups, permission hierarchy, and the access property in API responses",
+    "mimeType": "text/plain"
+  },
+  {
     "uri": "klbfw-describe.md",
     "name": "KLB API Describe Tool Manual",
     "description": "Guide for using the klbfw-describe command-line utility to explore and understand KLB API endpoints",
