@@ -13,6 +13,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 - [KLB Framework i18n](klbfw-i18next.md) - Guide for implementing internationalization with i18next
 - [KLB Framework Flutter](klbfw-flutter.md) - Documentation for the Flutter package integration
 - [Stripe Express Checkout](express_checkout.md) - Guide for implementing Stripe Express Checkout (Apple Pay, Google Pay)
+- [Frontend HTMX](frontend_htmx.md) - Guide for building server-rendered frontends using HTMX with the platform's templating system
 - [Media Variations API](media_variation.md) - Documentation for transforming media files through API endpoints
 - [Version Service Worker](install-version-service-worker.md) - Guide for setting up a service worker for version tracking in Vue.js apps
 - [Upload Protocol](upload_lowlevel.md) - Low-level upload protocol for client implementations without a native SDK
@@ -126,6 +127,17 @@ The [Stripe Express Checkout](express_checkout.md) guide covers:
 - Handling redirects and payment confirmations
 - Testing express checkout in development
 
+## Frontend HTMX
+
+The [Frontend HTMX](frontend_htmx.md) guide covers:
+
+- Setting up HTMX mode for server-rendered frontends
+- Template directives (klb-if, klb-loop, klb-i18n)
+- REST API integration with klb-rest elements
+- HTMX response control directives
+- Routing and URL patterns
+- Security features (CSP nonce, session tokens)
+
 ## Media Variations API
 
 The [Media Variations API](media_variation.md) documentation covers:
@@ -170,8 +182,9 @@ The [Upload Protocol](upload_lowlevel.md) specification covers:
 7. Set up [i18n with i18next](klbfw-i18next.md) for multi-language support
 8. Use the [KLB Framework Flutter](klbfw-flutter.md) for mobile application development
 9. Implement [Stripe Express Checkout](express_checkout.md) for streamlined payment processing
-10. Utilize [Media Variations API](media_variation.md) for optimized media delivery
-11. Set up [Version Service Worker](install-version-service-worker.md) for asset version tracking
+10. Build server-rendered frontends with [Frontend HTMX](frontend_htmx.md) integration
+11. Utilize [Media Variations API](media_variation.md) for optimized media delivery
+12. Set up [Version Service Worker](install-version-service-worker.md) for asset version tracking
 
 ## Using with Claude
 

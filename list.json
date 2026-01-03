@@ -66,6 +66,12 @@
     "mimeType": "text/plain"
   },
   {
+    "uri": "frontend_htmx.md",
+    "name": "Frontend HTMX Integration Guide",
+    "description": "Guide for building server-rendered frontends using HTMX with the platform's templating system including template directives, REST API integration, and routing",
+    "mimeType": "text/plain"
+  },
+  {
     "uri": "install-version-service-worker.md",
     "name": "Version Service Worker Installation Guide",
     "description": "Guide for setting up a service worker that adds version headers to asset requests for better cache management and version tracking in Vue.js applications",
