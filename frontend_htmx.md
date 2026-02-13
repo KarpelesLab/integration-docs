@@ -339,12 +339,37 @@ Force a complete page reload:
 
 ## Routing
 
-### Defining Routes
+The HTMX engine supports two mutually exclusive routing modes: **automatic routing** and **explicit routing**. The mode is determined by whether any `<klb-route>` element exists in any HTML file in the `dist/` directory.
 
-Use `<klb-route>` to define URL patterns:
+### Automatic Routing (no `<klb-route>` elements)
+
+If **no** HTML file contains a `<klb-route>` element, all HTML files are automatically mapped to URL paths based on their filenames:
+
+- `index.html` → `/`
+- `about.html` → `about.html`
+- `subdir/index.html` → `subdir/`
+- `subdir/page.html` → `subdir/page.html`
+
+This is the simplest mode and works well for small sites where the file layout mirrors the URL structure.
+
+### Explicit Routing (with `<klb-route>` elements)
+
+If **any** HTML file contains a `<klb-route>` element, automatic routing is **entirely disabled**. Only routes declared via `<klb-route>` will be registered. HTML files without a `<klb-route>` will not be accessible as pages.
+
+This means that once you add a `<klb-route>` to any file, you must explicitly declare routes for **all** pages, including the index:
 
 ```html
-<!-- In dist/user.html -->
+<!-- dist/index.html -->
+<klb-route path="/"/>
+
+<!-- dist/user.html -->
+<klb-route path="/users/:id"/>
+```
+
+A single HTML file can declare multiple routes:
+
+```html
+<!-- dist/user.html -->
 <klb-route path="/users/:id"/>
 <klb-route path="/profile/:username"/>
 
@@ -355,13 +380,9 @@ Use `<klb-route>` to define URL patterns:
 
 Route variables (`:id`, `:username`) are available in the template context.
 
-### Index Routes
-
-`index.html` is automatically mapped to `/`.
-
 ### Static Files
 
-Non-HTML files in `dist/` are served as static assets.
+Non-HTML files in `dist/` are always served as static assets regardless of routing mode.
 
 ---
 
