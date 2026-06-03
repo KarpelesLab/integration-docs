@@ -258,14 +258,13 @@ When a field has this validation:
 The system supports various flow actions:
 
 - `login`: User authentication
-- `register`: New user registration (email + password)
-- `register_passkey`: New user registration with a passkey instead of a password
+- `register`: New user registration (password *or* passkey — see [Passkey Integration](#passkey-integration))
 - `recover_account`: Account recovery
 - `delete_account`: Account deletion
 - `reset_password`: Password reset
 - `change_email`: Email change
 - `switch`: Switch between accounts (e.g., parent/child)
-- `add_passkey`: Enroll a new passkey on the current account (requires a fresh OTP check)
+- `add_passkey`: Enroll a new passkey on an authenticated account (requires a fresh OTP check)
 
 ## Client Implementation Guide
 
@@ -386,45 +385,44 @@ Passkeys are exposed through the [passkey field](#passkey). The client is respon
 
 4. **Flow continues**: the server identifies the user from `userHandle`, verifies the signature, and treats the assertion as both authentication *and* second factor. The next response is typically `complete: true`.
 
-### Sign-up (attestation) via `register_passkey`
+### Sign-up: passkey as credential inside the standard `register` flow
 
-`register_passkey` is the action a new user runs to create an account whose credential is a passkey instead of a password. It is **email-first**: the email address is collected and verified *before* the credential is minted, so a typo'd address can never have a passkey bound to it.
+There is no separate signup-with-passkey action. The standard `register` flow's registration form lets the user pick **either** a password **or** a passkey as their account credential, and the server accepts whichever is submitted. The frontend renders both options; the user fills in one path and submits.
 
+Server-emitted registration form (after the email has been collected and validated as new):
+
+```json
+{
+  "req": ["name"],
+  "fields": [
+    { "cat": "input", "name": "name",      "type": "text",     "...": "..." },
+    { "cat": "input", "name": "password",  "type": "password", "...": "..." },
+    { "cat": "input", "name": "password2", "type": "password", "...": "..." },
+    {
+      "cat": "special",
+      "type": "passkey_register",
+      "rp_id": "hub.atonline.com",
+      "rp_name": "AtOnline",
+      "user": { "id": "<base64 of 16 random bytes>", "name": "alice@example.com", "displayName": "alice@example.com" },
+      "challenge": "<base64>",
+      "pubKeyCredParams": [{ "alg": -7, "type": "public-key" }, { "alg": -8, "type": "public-key" }],
+      "authenticatorSelection": { "residentKey": "required", "requireResidentKey": true, "userVerification": "required" },
+      "attestation": "none",
+      "timeout": 120000,
+      "submit_as": "passkey_create"
+    }
+  ]
+}
 ```
-collect_signup_email
-  ↓
-check_email_verify_signup          ← server e-mails an 8-char code; client posts {code: "..."}
-  ↓
-create_passkey_for_signup          ← server posts a passkey_register field; client calls navigator.credentials.create
-  ↓
-collect_passkey_name               ← client posts {name: "Display Name"}
-  ↓
-check_tos                          ← standard agreement step
-  ↓
-finalize_passkey_signup → complete
-```
 
-Steps the client sees:
+Only `name` is in `req`; both credential paths are *optional* from the schema's point of view, but the server rejects submissions that have neither. The client chooses the path based on user interaction:
 
-| Step | Server emits | Client submits |
-|---|---|---|
-| `collect_signup_email` | An `email` input (plus an optional `no_email` checkbox when realm flag `user_allow_no_email` is set) | `{ email: "..." }` (or `{ no_email: true }`) |
-| `check_email_verify_signup` | A `code` input with `otp.format = "alnum"`, `otp.length = 8` | `{ code: "ABCDEFGH" }` (dashes/spaces stripped automatically) |
-| `create_passkey_for_signup` | A `cat: "special", type: "passkey_register"` field carrying `rp_id`, `rp_name`, `user.id`/`user.name`/`user.displayName`, `challenge`, `pubKeyCredParams`, `authenticatorSelection`, `attestation`, `timeout`, `submit_as` | `{ passkey_create: { id, clientDataJSON, attestationObject } }` |
-| `collect_passkey_name` | A `name` text input | `{ name: "Alice Example" }` |
-| `check_tos` | Country selector (only if `country_based_segments`) plus required agreement checkboxes | `{ country: "US", i_accept_tos: 1, ... }` |
-| `finalize_passkey_signup` | nothing — internal | nothing |
-| `complete` | `complete: true` with the new user | — |
+- **Password path** — user types `password` + `password2`, submits `{ name, password, password2 }`.
+- **Passkey path** — user clicks the "Use a passkey" button. The renderer calls `navigator.credentials.create({publicKey: {...the values from the passkey_register field...}})`, packages the response, and submits `{ name, passkey_create: { id, clientDataJSON, attestationObject } }`.
 
-If the email collected at step 1 already maps to a *non-shadow* account, the flow automatically pivots to `login` (server-side `go('login')`); the `link_pending_passkey` step in the login script then attaches the in-progress passkey to the existing account after the user authenticates.
+In either case the server then sends an email verification code (unless `skip_regcode`) and finalizes user creation after the code round-trips, just as it does for password-only registrations today. The `User__` UUID is allocated **at form-render time** and is stable across the form-submit → email-verify cycle — that is the userHandle bound into the credential, so it resolves cleanly at the user's first login.
 
-When the realm has the `user_allow_no_email` flag, the user may submit `{ no_email: true }` at step 1; the email-verification step is then skipped and the account is created without an email. The authenticator's credential picker will display the User UUID in that case — set the picker's friendly label by setting a `Display_Name` at step 4.
-
-#### Resume on abandon (the "Keep but resumable" guarantee)
-
-If the user closes the browser between steps 3 and 7, their account stays as `Status='shadow'` with the passkey enrolled. **To resume, the user simply signs in with the same passkey from the login form.** The server detects the shadow status on assertion and transparently routes them into `register_passkey` at the first incomplete step (typically `collect_passkey_name` or `check_tos`). No "continue your signup" affordance is needed — the natural action is to sign in.
-
-If the user abandons before step 3 (passkey was never minted) they will not yet have a credential to sign in with, but the next call to `register_passkey` with the same email will resume against the existing shadow row (server-side `\User::create` shadow-merge) — the user just enters the email again and re-verifies it.
+If the email entered earlier in the flow matches an existing non-shadow account, the server pivots to `login` (the email-collision branch is unchanged). To attach a passkey to a pre-existing account, the user logs in and runs the `add_passkey` action.
 
 ### Registration (attestation) via `add_passkey`
 
@@ -523,22 +521,22 @@ When the user is identified (after submitting an email + password) and has at le
 7. Server returns `complete: true` with user data
 8. Client redirects to the designated page or application
 
-### Example Flow: Passkey Sign-up (`register_passkey`)
+### Example Flow: Passkey Sign-up (inside the standard `register` action)
 
-1. Client initiates `register_passkey`
+1. Client initiates `register` (the same action used for password signup)
 2. Server returns an email input field
 3. User enters their email; client submits `{ email: "..." }`
-4. Server validates the email, creates a shadow user with `Status='shadow'`, sends an 8-character verification code, returns a `code` input
-5. User reads the email and enters the code; client submits `{ code: "..." }`
-6. Server returns a `passkey_register` field carrying the challenge plus `user.name = email` and full `pubKeyCredParams` / `authenticatorSelection` / `attestation` parameters
-7. Client calls `navigator.credentials.create(...)` with those parameters; the user confirms with their authenticator
-8. Client submits `{ passkey_create: { id, clientDataJSON, attestationObject } }`
-9. Server enrolls the credential on the shadow user; returns a `name` text input
-10. User enters a display name; client submits `{ name: "..." }`
-11. If the realm requires ToS / country, those fields are presented next
-12. Server promotes the shadow user to `Status='valid'`, sends the `mail/account_confirm.mail`, and returns `complete: true`
+4. Server validates the email is new and returns the registration form, which contains: `name`, `password`, `password2`, and a `passkey_register` special field (all in one response)
+5. The renderer offers the user two paths side-by-side: type a password, or click "Use a passkey"
+6. The user clicks "Use a passkey" — the renderer calls `navigator.credentials.create(...)` with the parameters embedded in the `passkey_register` field; user confirms with their authenticator
+7. Client submits `{ name: "Alice Example", passkey_create: { id, clientDataJSON, attestationObject } }` — no `password` field
+8. Server validates the attestation, stashes the registration data including the attestation in the session, sends an 8-character verification code email
+9. User reads the email and enters the code; client submits `{ code: "..." }`
+10. Server creates the user with the pre-allocated `User__` UUID, enrolls the passkey credential against it, applies the `Display_Name` to the profile
+11. If the realm requires ToS, those fields are presented next
+12. Server returns `complete: true` with the new user and a session
 
-If the user closes the browser at any point after step 6, step 7 still has the passkey enrolled on the shadow user. The user simply signs in with that passkey from the login form; the server detects the shadow status and resumes them at step 9 (or wherever they left off).
+The user is automatically logged in once registration completes. The next time they want to sign in, they pick this credential from the passkey field on the login form.
 
 ### Example Flow: Passkey Enrollment (`add_passkey`)
 
