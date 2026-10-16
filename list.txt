@@ -1,4 +1,5 @@
 access_levels.md
+ai_chat_subject.md
 apibasics.md
 express_checkout.md
 frontend_htmx.md

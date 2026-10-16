@@ -78,6 +78,12 @@
     "mimeType": "text/plain"
   },
   {
+    "uri": "ai_chat_subject.md",
+    "name": "Site AI Chat (Chat Subjects)",
+    "description": "Guide for letting site visitors chat with an AI configured per realm (chat subjects), with catalog search and cart tools, including anonymous chats, limits and admin management",
+    "mimeType": "text/plain"
+  },
+  {
     "uri": "README.md",
     "name": "Karpeles Lab Inc Integration Documentation",
     "description": "Overview of all documentation for integrating with Karpeles Lab Inc systems and APIs",

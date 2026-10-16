@@ -13,6 +13,7 @@ This repository contains comprehensive documentation for integrating with Karpel
 - [KLB Framework i18n](klbfw-i18next.md) - Guide for implementing internationalization with i18next
 - [KLB Framework Flutter](klbfw-flutter.md) - Documentation for the Flutter package integration
 - [Stripe Express Checkout](express_checkout.md) - Guide for implementing Stripe Express Checkout (Apple Pay, Google Pay)
+- [Site AI Chat](ai_chat_subject.md) - Guide for letting site visitors chat with an AI that can search the catalog and manage their cart
 - [Frontend HTMX](frontend_htmx.md) - Guide for building server-rendered frontends using HTMX with the platform's templating system
 - [Media Variations API](media_variation.md) - Documentation for transforming media files through API endpoints
 - [Version Service Worker](install-version-service-worker.md) - Guide for setting up a service worker for version tracking in Vue.js apps
@@ -171,6 +172,16 @@ The [Upload Protocol](upload_lowlevel.md) specification covers:
 - Error handling and retry behavior
 - Implementation checklists and example code
 
+## Site AI Chat Documentation
+
+The [Site AI Chat](ai_chat_subject.md) guide covers:
+
+- Chat subjects: per-realm AI chat configuration (prompt, model, tools, limits)
+- Anonymous and logged-in visitor chats
+- Catalog search and cart tools available to the AI
+- Creating chats, sending messages and displaying the conversation
+- Managing subjects as a realm administrator
+
 ## Getting Started
 
 1. Review the [API Basics](apibasics.md) document to understand how to authenticate and make API requests
@@ -185,6 +196,7 @@ The [Upload Protocol](upload_lowlevel.md) specification covers:
 10. Build server-rendered frontends with [Frontend HTMX](frontend_htmx.md) integration
 11. Utilize [Media Variations API](media_variation.md) for optimized media delivery
 12. Set up [Version Service Worker](install-version-service-worker.md) for asset version tracking
+13. Add a [Site AI Chat](ai_chat_subject.md) to let visitors find products and fill their cart
 
 ## Using with Claude
 
